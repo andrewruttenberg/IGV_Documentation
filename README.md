@@ -1,11 +1,11 @@
 # Welcome to IGV
 This document is going to go serve as an introduction to IGV, including how to set it up, the major features of the program, and how to idenify differrent variants, including single nucleotide variants (SNVs), small variants from 2-50 bases (indels), and larger structural variants of at least 50 bases (SVs). There will also be examples and questions along the way to help this information sink in. 
 
-For this tutorials a few peices of setup are required. First, the desktop apllications for nIGV can be downloaded [here](https://igv.org/doc/desktop/#DownloadPage/). You will have to select the right version of the application for your computer (Mac, PC, etc). Second, we will be using five files throughout this tutorial. These files can be found at `/storage1/fs1/jin810/Active/testing/Ruttenberg/IGV_Tutorial`. The five files are
+For this tutorials a few peices of setup are required. First, the desktop apllications for nIGV can be downloaded [here](https://igv.org/doc/desktop/#DownloadPage/). You will have to select the right version of the application for your computer (Mac, PC, etc). Second, we will be using various files throughout this tutorial. These files can be found at `/storage1/fs1/jin810/Active/testing/Ruttenberg/IGV_Tutorial`. These files are
 - proband bam
 - father bam
 - mother bam
-- list of SNVs and indels in the proband
+- `/storage1/fs1/jin810/Active/testing/Ruttenberg/IGV_Tutorial/HG005_SNVs_CHR1.vcf` and `/storage1/fs1/jin810/Active/testing/Ruttenberg/IGV_Tutorial/HG005_SNVs_CHR1.vcf.idx`: The `.vcf` file contains a list of SNVs present in the first chromosme of HG005. the `.idx` file is an index file for the `.vcf` file. In IGV if the `.vcf` file is too large it uses an index file top help loads the data
 - list of SVs in the proband
   
 After conferming you have access to these files and have downloaded IGV continue on to the rest of the tutorial
@@ -41,5 +41,9 @@ If there is any other file you have stored locally or on the RIS that you think 
 
 There are a few addition files IGV provides that you may want to load for you analyis, for example list of know repeditive regions or list of known genes. To load these files go to `File->Load from Server`, Check the boxes for the files you want to load and click `OK` to load them. 
 
-###CHALANGE 1
+### CHALANGE 1
 Can you make your IGV look the same as the following screenshot
+
+<details><summary>HINT 1</summary>
+&emsp; &ensp; Repeat masker, which is a file that must be loaded from IGVs server, is currently loaded
+
