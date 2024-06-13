@@ -2,9 +2,8 @@
 This document is going to go serve as an introduction to IGV, including how to set it up, the major features of the program, and how to idenify differrent variants, including single nucleotide variants (SNVs), small variants from 2-50 bases (indels), and larger structural variants of at least 50 bases (SVs). There will also be examples and questions along the way to help this information sink in. 
 
 For this tutorials a few peices of setup are required. First, the desktop apllications for nIGV can be downloaded [here](https://igv.org/doc/desktop/#DownloadPage/). You will have to select the right version of the application for your computer (Mac, PC, etc). Second, we will be using various files throughout this tutorial. These files can be found at `/storage1/fs1/jin810/Active/testing/Ruttenberg/IGV_Tutorial`. These files are
-- proband bam
-- father bam
-- mother bam
+- `/storage1/fs1/jin810/Active/Projects/SMAHT/data/bam_sorted/hg002_sorted.bam`: This is a BAM file for the sample HG002, which we will use for examples at the end of this tutorial
+- - `/storage1/fs1/jin810/Active/Projects/SMAHT/data/bam_sorted/hg005_sorted.bam`: This is a BAM file for the sample HG005, which we will use as examples thought this tutorial
 - `/storage1/fs1/jin810/Active/testing/Ruttenberg/IGV_Tutorial/HG005_SNVs_CHR1.vcf` and `/storage1/fs1/jin810/Active/testing/Ruttenberg/IGV_Tutorial/HG005_SNVs_CHR1.vcf.idx`: The `.vcf` file contains a list of SNVs present in the first chromosme of HG005. the `.idx` file is an index file for the `.vcf` file. In IGV if the `.vcf` file is too large it uses an index file top help loads the data
 - list of SVs in the proband
   
