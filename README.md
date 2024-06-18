@@ -90,5 +90,61 @@ There are also two ways to remove a region from the ROI list
 2. in addition if you go to `regions->region navigator` you can select multip[le ROI and selecting Remove will delete them all
 ## controling the look and sorting of the reads
 Depending on what you are looking for you may want IGV to show you different peices of information about the reads to display the information in different ways. Here are a few of the key ways to help you visualize the data
-1. grouping reads: Right clicking on a bam file
+### Grouping reads
+Right clicking on a bam file you will see the option `group alignments by`. Hovering your mouse over it will revieal different options to group the aligments.
+
+A few of the most useful options are
+  - read strand: this seperate reads sequenced in the forward direction from those sequenced in the reverse direction
+  - chromosome of mate: this seperate reads by the chromosome the reads pair aligned to. This can be useful in idenifying large insertions or translocations
+  - pair orientations: This seperate the reads by pair orientation, either RL, LR, RR or LL. This is useful in idenifying inversions and duplications, as well as some insertions. For more information on pair end orientation see [here](https://gatk.broadinstitute.org/hc/en-us/articles/360035531792-Paired-end-or-mate-pair).
+
+### Sorting reads 
+Right clicking on a bam file you will see the option `sort alignments by` directly below `group alignments by`, This will sort the reads by the given 
+criteria. Note that the sorting happens based on your current window, so if you move to a new region of the genome you will have to re sort the reads to how you want them
+
+A few of the most use options are
+- start loction: This sorts each read by the start location of the read (always the lowest base) This is useful for grouping reads with similar feats togheter, such a grouping SNVs or SRs together
+- mapping quality: This sorts the reads by the mapping quality, bringing all the most confidently mapped reads to the top
+- instert size: this sorts by inster size. This will group all the reads with larger or smaller than expected insert sizes together, helping show if there is instert size evidence for a structual variants
+- reverse sorting. This is not a sorting startagy on its own but if selected will take the sorting statagy you choose (such as start location or insert size) and will reverse the sort, sending then reads originialy at the bottom to the top and vise versa
+
+### Coloring reads
+like grouping and sorting reads, `color reads by` is an option by right clicking the bam file and have various options for how to color the reads. 
+
+Some of the mosty commonly used options are
+- insert size: read pairs with a larger than expected distance between the two reads and smaller than expected distance will be colored red and blue respecitvly. This is useful in idenifying various structual variants.
+  - to know the exact insert size of two reads click on the read and look for the value next to `insert size`
+    - if the value is negitive that means you clicked on the second of the two reads. The absolute value will be the insert size 
+- pair end orientation: colors forward reverse reads (FR) grey (no color), RF Green, FF cyan, and RR Blue. This will also color each read where the pair is mapped to a different chromosome by various colors depending on the chomosome
+  - Note there is an option ti color by insert size and pair end orientation. This works well for seeing both peices of information, but suffers from in a read has an abnosmal insert size and not a FR pair end orientation it will color the read by the pair end orientation, not the insert size. It is for that reason I recommended coloring by only insert size and grouping by pair end orientation, it allows you to see both peices of information at the same time   
+
+  For group aligments, sort aligments, and color aligments there are many more options so feel free to play around with the choices to see if there are additions options that will work with how you are trying to use IGV
+
+### Showing bases
+There are a few different controls users have over what bases are shown and how they look. You can change these seting by right clicking the bam file
+- `show all bases`: if this is checked than instread of seeing grey lines for you reads you will see the exact sequence at every base for every reads. I persoanlly find this to be too much information at once and rarly use it, but is can be helpful if you need to know the exact seqence of a specificly region that is larger than the mismatched bases
+- `show mismatched bases`: having this option selected will show a grey bar for any base in a read that matches the reference sequence, and will show the exact bases if it does not match the reference. I find this setting the most useful as more often then not we are only intrested in variations from the reference.
+   - Note: unless you selected `show soft-clipped bases` as descriped earlier, this will only show you when an indivual bases differs from the reference. You must have this option selected and have it set up to show sloft clips in order to be able to see the soft clips
+- `shade base by quality`: This will shade any shown bases (not the grey bar) bases on how cofiudenct the sequencing of that base is. The closer the base looks to grey the less confidnet the sequencing is. To see the exact quality of the seuqenbciong of the base click on the base and look for the number next to `QV`
+
+### View as pairs
+Another useful setting you can turn on and off by right clicking the bam file is `View as pairs`. Turning this on will put the two readsn in the read pair on the same row and show a grey line connecting them. This is useful as it lets to manually see the instert size and if it is larger or smaller than expected. If you want to sort by insert size to see if there is any variation it is highly recommended you turn on this setting first. One downside is it makes it harder to group reeads overlapping the same sequence together, making it harder to see SNVs or soft clips
+
+###challange.
+Can you make your IGV look like this
+Show some image
+
+## BLAT
+
+# Identifying single nueclotide variants in IGV 
+
+# Identifying small indels in IGV 
+
+# Identifying large sturcural variants in IGV 
+
+# QUIZ TIME!
+
+
+
+
 
