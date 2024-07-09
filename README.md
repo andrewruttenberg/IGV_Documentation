@@ -130,11 +130,40 @@ There are a few different controls users have over what bases are shown and how 
 ### View as pairs
 Another useful setting you can turn on and off by right clicking the bam file is `View as pairs`. Turning this on will put the two readsn in the read pair on the same row and show a grey line connecting them. This is useful as it lets to manually see the instert size and if it is larger or smaller than expected. If you want to sort by insert size to see if there is any variation it is highly recommended you turn on this setting first. One downside is it makes it harder to group reeads overlapping the same sequence together, making it harder to see SNVs or soft clips
 
-###challange.
+### challange.
 Can you make your IGV look like this
 Show some image
 
 ## BLAT
+Mutations are commonly a result of genomic rearagments, meaning mutations come from other locations in the genome. Thus is can be exreemly useful the find the most likely location for a genomic sequnece from the reference sequence. This is useful as the location a read maps to is not always the seqence of the reference genome it matches the best. The best way to map a sequence to the reference is using BLAT. Thankfully BLAT is built into IGV, making it easy to use. This section will go over the easier ways to BLAT a seqence
+### Using BLAT on a user defined sequence.
+The most basic way to use BLAT is to input a sequence and BLAT will tell you where in the reference best matches that seqence. To use BLAT this way go to `Tools->BLAT`. You should now be prompted to "enter a sequence to blat" Type in your sequence and press "OK" to run blat on that seqence.
+- Note 1: Blat always requires a reference sequence to check the inout sequence against. In IGV this sequence will always be the reference assembly selected. To change the refernece use for blat you  us chnage the refernce assembly in the top left corenr.
+- Note 2: Due to the low complexity of DNA only have 4 base option, the sequence you input must be at least 20 bases
+### Challenge
+where in refernce assembly hg38 does the following sequence best match. `TATTTTAGTACATATATGTAATTCACAAATAAATGAATATATAAATATTTGTAGAGTGTGCCTAAAATTTATAACTGATAGTACATGTAATCAGTCAAGGTTAAGGACTCTGCTATCTTCCCGCGACTGGGCCCAAATCCCTAATGGAGAG`
+<details><summary>Answer</summary>
+&emsp; &ensp; The sequence best matches to chr1:159692997-159693148 and hasd a score of 986
+</details>
+
+### Finding the most likely location for a read
+Another useful think you can do in IGV is run a BLAT search on the sequence of a read. This can be useful as reads don't away align to the place they match most, insteads aligning differenty based on the aligment of its pair. It is also useful as there are many reapst region or simular sequnces in the genome and knowing a read has other simlar matches can be usful in variatn detection. Finally if the read spans a deletion compared to the refernce sequence, blating the read will show you the deletion. To run a BLAT search on a read right click the read and select `BLAT read sequence` 
+### Challenge 
+Set your window to `chr1:105963222-105963498`. You should see multiple red reads in the RL track (see below). Blat on of these red reads. About how many different aligments havew a score greater than 600
+<details><summary>Answer</summary>
+&emsp; &ensp; Depending on the read you selected, there should be between 5 and 10 locations with a score greater than 600
+</details>
+
+### Searching Soft clips with blat
+lastly, and arguably more usefully, you can use blat to search a soft clip. To do so again right click on the read with the soft clip, and select `BLAT left-clipped sequence` or `BLAT right-clipped sequence` depending on which side of the read has the soft clip. keep in mind that the soft clip must be at least 20 bases to be used as an input for blat, so the option will not show up if there is not a coft clip long enough
+
+### challenge
+Go to the window chr6:68,014,727-68,015,341. On the left side of the screen should be right soft-clips. On the right should be left soft clips. Right click on the reads with left cloft clips. Where does it best align to
+<details><summary>Answer</summary>
+  &emsp; &ensp; Depending of the read you selected the end position could be different, but the start position should be chr6:68015268. Follow up question. Note how close this is the the read itself. What could that mean. If you are unsure come back to thsi question afetr finishing the guide and you should be able to answer the question.
+</details>
+
+With this you should have enough information for most tasks you would want to accompish in IGV. Keep in mind there are many other tools not discussed in this guide. It is highly recommend to expirence with other tools to see what else you can do. For more information of what you can accomplish using IGV, refer to [this](https://igv.org/doc/desktop/#UserGuide) guide
 
 # Identifying single nueclotide variants in IGV 
 
