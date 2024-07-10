@@ -166,7 +166,23 @@ Go to the window chr6:68,014,727-68,015,341. On the left side of the screen shou
 With this you should have enough information for most tasks you would want to accompish in IGV. Keep in mind there are many other tools not discussed in this guide. It is highly recommend to expirence with other tools to see what else you can do. For more information of what you can accomplish using IGV, refer to [this](https://igv.org/doc/desktop/#UserGuide) guide
 
 # Identifying single nueclotide variants in IGV 
+As will all variant confermation in IGV, you will need a vcf of candidate variants to either conferm as true positives or label as false positive. For this example the candidate SNVs can be found at `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Father_UDN121697_snvs_chr1.vcf`
 
+idenfitication of SNVs is extreemly straight forward as IGV will label when there is an snv or not. Assumming you have the IGV window showing the position of the cadidte snvs, a true positive should look something like this
+
+
+in this screenshot we can see for every read covering base chr1:61699062 there is a C at that base instead of the refernce G. This tells us there is a G->C polymophisim and it is homozygous since it is in all reads. To get the exact percentage of reads with the alternatvie read click the base in the read depth track (in this case it is the blue rectangle above the C's)
+
+Another case you may see is the following
+
+In this case we can see about half the reads show the reference G and the other have show trhe alternative A. This implies the G->A mutation is heterozygous.
+
+lastly you may see a case like this
+
+while the signal is a bit messy here (which is common with real data) we can see the majority of the reads match the refenence. However there is a signficant amount of reads that show a C at this base instead of a T. There could be a few explinations for how this occured. Firsly this could be a heterozygous mutations, however the probably of only 14 or less of the 68 reads being the alternate allele are 0.00000042, which is highly unlikely. It could be sequencing error as well, however SRS has a relitivly low error rate of about 1% (depending on the sequencing tool), so the odds of the same sequencing error occuring 14 times in 68 reads is again extremly low. Thus the most likely explination is it is a somatic mutation, or a mutation that is not in all cells. There is no hard cutoff percentige for somatic vs heterozygous vs homozygous so you will need to decide beforehand how to will classify them.
+
+### challenge
+how would you label the following mutations
 # Identifying small indels in IGV 
 
 # Identifying large sturcural variants in IGV 
