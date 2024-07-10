@@ -181,9 +181,9 @@ With this you should have enough information for most tasks you would want to ac
 
 # Identifying single nueclotide variants in IGV 
 As will all variant confermation in IGV, you will need a vcf of candidate variants to either conferm as true positives or label as false positive. For this example the candidate SNVs can be found at `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Father_UDN121697_snvs_chr1.vcf`
+In addition make sure you have `Show mismatched bases` on to be able to see the variants
 
 idenfitication of SNVs is extreemly straight forward as IGV will label when there is an snv or not. Assumming you have the IGV window showing the position of the cadidte snvs, a true positive should look something like this
-
 
 in this screenshot we can see for every read covering base chr1:61699062 there is a C at that base instead of the refernce G. This tells us there is a G->C polymophisim and it is homozygous since it is in all reads. To get the exact percentage of reads with the alternatvie read click the base in the read depth track (in this case it is the blue rectangle above the C's)
 
@@ -198,7 +198,7 @@ while the signal is a bit messy here (which is common with real data) we can see
 ### challenge
 how would you label the following mutations
 # Identifying small indels in IGV 
-
+Indels can be broken down into insertions and deletions. Most of the time indels are able to be clearly seen in IGV. However there may be some edge cases that are more difficult to be able to see. we will go over all these cases the the section below. In addition there are a few settings that must be on to detect the indels. Like with SNVs `Show mismatched bases` must be on. In addition make sure 
 # Identifying large sturcural variants in IGV 
 
 # QUIZ TIME!
