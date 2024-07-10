@@ -1,3 +1,8 @@
+Table of Content
+- [Welcome to IGV](#Welcome-to-IGV)
+- [What is IGV](#What-is-IGV)
+- [Setting up IGV](#Setting-up-IGV)
+
 # Welcome to IGV
 This document is going to go serve as an introduction to IGV, including how to set it up, the major features of the program, and how to idenify differrent variants, including single nucleotide variants (SNVs), small variants from 2-50 bases (indels), and larger structural variants of at least 50 bases (SVs). There will also be examples and questions along the way to help this information sink in. 
 
