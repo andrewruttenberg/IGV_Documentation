@@ -197,6 +197,8 @@ while the signal is a bit messy here (which is common with real data) we can see
 
 ### challenge
 how would you label the following mutations
+
+
 # Identifying small indels in IGV 
 Indels can be broken down into insertions and deletions. Most of the time indels are able to be clearly seen in IGV. However there may be some edge cases that are more difficult to be able to see. we will go over all these cases the the section below. In addition there are a few settings that must be on to detect the indels. Like with SNVs `Show mismatched bases` must be on. In addition make sure 
 # Identifying large sturcural variants in IGV 
