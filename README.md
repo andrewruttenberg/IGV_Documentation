@@ -183,21 +183,32 @@ With this you should have enough information for most tasks you would want to ac
 As will all variant confermation in IGV, you will need a vcf of candidate variants to either conferm as true positives or label as false positive. For this example the candidate SNVs can be found at `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Father_UDN121697_snvs_chr1.vcf`
 In addition make sure you have `Show mismatched bases` on to be able to see the variants
 
-idenfitication of SNVs is extreemly straight forward as IGV will label when there is an snv or not. Assumming you have the IGV window showing the position of the cadidte snvs, a true positive should look something like this
+idenfitication of SNVs is extreemly straight forward as IGV will label when there is an snv or not. The basis of SNV idneification is you go to the location of a canidiate SNV and see how many of the reads at that position show the alternative allele. For a heterozygous mutation is should be about 50% of the reads. For a homozygous case it should be 100% of the reads. These two cases can be seen below.=
 
-in this screenshot we can see for every read covering base chr1:61699062 there is a C at that base instead of the refernce G. This tells us there is a G->C polymophisim and it is homozygous since it is in all reads. To get the exact percentage of reads with the alternatvie read click the base in the read depth track (in this case it is the blue rectangle above the C's)
+![Screenshot of empty igv window](/Images/Heterozygous_SNV.png)
 
-Another case you may see is the following
+![Screenshot of empty igv window](/Images/Homozygous_SNV.png)
 
-In this case we can see about half the reads show the reference G and the other have show trhe alternative A. This implies the G->A mutation is heterozygous.
+The top screenshot show the case of a heterzygous mutation, where the alt allele A is in about 50% of the reads, and the refernce allele G is in the other 50%. The lower screenshot shows a homozygous mutation where the alt allele C is in all the reads and the reference G is not seen at all
 
-lastly you may see a case like this
+To get the exact percentage of reads with the alternatvie read click the base in the read depth track (in this case it is the green/orange rectangle above the A's and the blue rectangle above the C's respecticly)
+
+In addition you may see a case like the following
+
+![Screenshot of empty igv window](/Images/Somatic_SNV.png)
 
 while the signal is a bit messy here (which is common with real data) we can see the majority of the reads match the refenence. However there is a signficant amount of reads that show a C at this base instead of a T. There could be a few explinations for how this occured. Firsly this could be a heterozygous mutations, however the probably of only 14 or less of the 68 reads being the alternate allele are 0.00000042, which is highly unlikely. It could be sequencing error as well, however SRS has a relitivly low error rate of about 1% (depending on the sequencing tool), so the odds of the same sequencing error occuring 14 times in 68 reads is again extremly low. Thus the most likely explination is it is a somatic mutation, or a mutation that is not in all cells. There is no hard cutoff percentige for somatic vs heterozygous vs homozygous so you will need to decide beforehand how to will classify them.
 
 ### challenge
-how would you label the following mutations
+how would you label the following mutations in `WGS_001_Father`. All the following mutations can be found in `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Father_UDN121697_snvs_chr1.vcf`
 
+1. Chr1:72008005
+2. Chr1:72011871
+3. Chr1:72022965
+4. Chr1:72105973
+5. Chr1:72113026
+6. Chr1:72114987
+7. Chr1:72120659
 
 # Identifying small indels in IGV 
 Indels can be broken down into insertions and deletions. Most of the time indels are able to be clearly seen in IGV. However there may be some edge cases that are more difficult to be able to see. we will go over all these cases the the section below. In addition there are a few settings that must be on to detect the indels. Like with SNVs `Show mismatched bases` must be on. In addition make sure 
