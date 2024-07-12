@@ -209,6 +209,18 @@ how would you label the following mutations in `WGS_001_Father`. All the followi
 5. Chr1:72113026
 6. Chr1:72114987
 7. Chr1:72120659
+   
+<details><summary>Answers</summary>
+&emsp; &ensp;
+
+1. Homozygous
+2. Heterozygous
+3. Somatic (37% of the reads showing the alt allele in a heterouzygous is unlikely, but very possible. Depending on your criteria a clasifction of heterozugous or somatic could be appopriate)
+4. Heterozygous
+5. heteroygous and somatic (the T-> Mutation appears to be heterozygous and the Y->G mutatation looks somatic being in 3% of reads)
+6. Homozygous
+7. mutliallelic heterozygous(one chromosome is A->C, the other is A->T)
+</details>
 
 # Identifying small indels in IGV 
 Indels can be broken down into insertions and deletions. Most of the time indels are able to be clearly seen in IGV. However there may be some edge cases that are more difficult to be able to see. we will go over all these cases the the section below. In addition there are a few settings that must be on to detect the indels. Like with SNVs `Show mismatched bases` must be on. In addition make sure 
