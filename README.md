@@ -223,7 +223,32 @@ how would you label the following mutations in `WGS_001_Father`. All the followi
 </details>
 
 # Identifying small indels in IGV 
-Indels can be broken down into insertions and deletions. Most of the time indels are able to be clearly seen in IGV. However there may be some edge cases that are more difficult to be able to see. we will go over all these cases the the section below. In addition there are a few settings that must be on to detect the indels. Like with SNVs `Show mismatched bases` must be on. In addition make sure 
+Indels can be broken down into insertions and deletions. Most of the time indels are able to be clearly seen in IGV. However there may be some edge cases that are more difficult to be able to see. we will go over all these cases the the section below. In addition there are a few settings that must be on to detect the indels. Like with SNVs `Show mismatched bases` must be on. In addition make sure `label indels > theshold` checked and `Label threshold (bases)` set to 0. Finally concerm that `shows soft-clipped bases` is check. For the last two setting they can be found in `view->preferences->alignments`
+
+## insetions
+insertions occurer when there are new bases inserted between two bases in the reference sequence. These can be seen in IGV by looking for purple bars with white numbers on them in the reads (see below). The location in the read will always be between two bases, showing when the seuqnece is instered into the DNA, and the number rep[resents how many bases are insterted. To see the exact seqeunce instered click on the purple bar
+
+![Screenshot of empty igv window](/Images/indel_insertions.png)
+
+## Deletions
+Deletions occure when a small sequence of DNA is removed compared to the reference sequence. Like with indels IGV will directly show these on the reads. In this case a part fo the read will be replaced with a black line with a purple number. That number again shows the number of bases missing. To get the sequence missing you can look at the sequence track and see what bases the gap overlaps
+
+![Screenshot of empty igv window](/Images/indel_deletion.png)
+
+Like with SNVs, indels can be catadoaired as heterozygous, homozygous, or somatic, based on the AF. However unlike with SNVs these is no easy way to get the exact number of reads that show the mutation without manually counting it. For deletions you could compare the read depth outside the mutation vs inside the mutations, but these values are subject to noise and misaligment making them not the most reliable. In addition keep in mind that indels in multiple locations could be the same indel if the regeon is a repeat.
+
+![Screenshot of empty igv window](/Images/indel_repeat_regeion.png)
+
+In this screenshot IGV shows a deletion of the sequence `TTTTTC` from chr1:155568828-155568833. However this region is a repeat of that `TTTTTC` sequence, so it is imporible to know which repeat is missing. Thus if the deletion was labeled from chr1:155568834-155568839 it would be refering to the same indel
+
+Finally for larger indels (by defenution indels cannot be larger than 50 bases otherwise they would be catoigrozied as a structual variant) is is possible for a read to not span the entire mutation. This prevent IGV from showing the SV. instead you will see soft clips at the end of the read.
+
+![Screenshot of empty igv window](/Images/indel_del_with_soft_clips.png)
+![Screenshot of empty igv window](/Images/indel_ins_with_soft_clips.png)
+
+In these two examples we can see most of the reads label the indel. Howeverm some of the reads just shiow a sequence of mismatched bases at the end. This is a soft clip. With IGV is saying is up to a point this read is aligning with the reference sequence here, but at the soft clip it is no longer a match. For the deletion we can see the soft clip sequence (the bases in the read) corresponds with the sequnce after the labeled indel. This matches with the other reads showing the indel as all the reads show the consesnus sequence with those 6 bases missing. IGV is just unabel to label the indel on these reads because it does not have enough of the sequence following to be sure the soft clip seqeucne comes from that region. In the insertions we can see it is an sertion of the bases `CA`. However IGV shows more than those bases in the soft clip. However looking at the soft clip seqeucne we see the `CA` following the expected reference sequence before the indel. This matches with the other indels as it shows the reference seqeunce before the indel, followed by the indel lequence, and then the referecne sequence after the indel (sequence after is not shown since it is aigming with the reference) Again it is shown as a soft clip rather than an indel since IGV does not have enough of the sequence before the indel to be sure that is where the sequence is from. Keep this in mind if you are visuaklizing indels and you see soft clips rather than indel markers.
+
+In the example above
 # Identifying large sturcural variants in IGV 
 
 # QUIZ TIME!
