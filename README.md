@@ -202,13 +202,13 @@ while the signal is a bit messy here (which is common with real data) we can see
 ### challenge
 how would you label the following mutations in `WGS_001_Father`. All the following mutations can be found in `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Father_UDN121697_snvs_chr1.vcf`
 
-1. Chr1:72008005
-2. Chr1:72011871
-3. Chr1:72022965
-4. Chr1:72105973
-5. Chr1:72113026
-6. Chr1:72114987
-7. Chr1:72120659
+1. chr1:72008005
+2. chr1:72011871
+3. chr1:72022965
+4. chr1:72105973
+5. chr1:72113026
+6. chr1:72114987
+7. chr1:72120659
    
 <details><summary>Answers</summary>
 &emsp; &ensp;
@@ -248,9 +248,34 @@ Finally for larger indels (by defenution indels cannot be larger than 50 bases o
 
 In these two examples we can see most of the reads label the indel. Howeverm some of the reads just shiow a sequence of mismatched bases at the end. This is a soft clip. With IGV is saying is up to a point this read is aligning with the reference sequence here, but at the soft clip it is no longer a match. For the deletion we can see the soft clip sequence (the bases in the read) corresponds with the sequnce after the labeled indel. This matches with the other reads showing the indel as all the reads show the consesnus sequence with those 6 bases missing. IGV is just unabel to label the indel on these reads because it does not have enough of the sequence following to be sure the soft clip seqeucne comes from that region. In the insertions we can see it is an sertion of the bases `CA`. However IGV shows more than those bases in the soft clip. However looking at the soft clip seqeucne we see the `CA` following the expected reference sequence before the indel. This matches with the other indels as it shows the reference seqeunce before the indel, followed by the indel lequence, and then the referecne sequence after the indel (sequence after is not shown since it is aigming with the reference) Again it is shown as a soft clip rather than an indel since IGV does not have enough of the sequence before the indel to be sure that is where the sequence is from. Keep this in mind if you are visuaklizing indels and you see soft clips rather than indel markers.
 
-In the example above
-# Identifying large sturcural variants in IGV 
+### challenge
+how would you label the following mutations in `WGS_001_Father`. All the following mutations can be found in `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Father_UDN121697_indels_chr1.vcf`
 
+1. chr1:28932407
+2. chr1:28947408
+3. chr1:28990296
+4. chr1:48460717
+5. chr1:48497209
+   
+<details><summary>Answers</summary>
+&emsp; &ensp;
+
+1. Homozygous insertion 
+2. Heterozygous deletion
+3. Somatic insertion
+4. Heterozygous deletion
+5. Heterzygous Interstion
+</details>
+
+# Identifying large sturcural variants in IGV 
+Strucutral variants are the most complicated to detect in IGV because most sequencing is short read, and thus do not span the entire read. Therefore IGV is unable to directly show you the mutation, and rather you must use clue to infer the presense of an SV. Thus this guide will go over the major SV's you may run into along with how they will appear in IGV. For more detail, including how visualze comxplex stuctual variants, refer to the following slides. ([Visualize common SVs](https://docs.google.com/presentation/d/13rQ7rrYeOpSAon3BPFgQPzYyYhBAPeLo_uVq0ET3s7E/edit?usp=sharing), [Visualize complex SVs](https://docs.google.com/presentation/d/1dCcq4Rq3-AJASmq7eK62l8YLsMMCMNWzQjSJYnHTcgo/edit?usp=sharing))
+
+##Overview of evidence
+All the peices of evidence you will want to use have been mentioned before in this guide but here we will consolidate it to one place
+### Read depth
+Read depth is the number of reads that cover an indivudalze base. Any read that align over a base will increase the read depth unless it is a soft clip at that location. The read depth is shown in IGV as the grey bar at the top of bam file track. For variants that either duplicate or deleate regions of the genome there will be a change in the read deptj
+### Soft Clips
+Soft clips are parts of a indivudual read
 # QUIZ TIME!
 
 
