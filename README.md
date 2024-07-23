@@ -286,7 +286,7 @@ in Short read sequencing the first read is sequence from 5' to 3' and the second
 
 With these four peice of evidence established we will now go into detail into the main five kinds of variants, deletions, duplications, inversion, insertions, and translocation. It is imprtant to not just understand the evidence but understand why the evidence looks this way so make sure to spend time understanding how the signal occurs.
 
-##Deletion
+## Deletion
 A deletion is a remove of a large segment of the genome. They tend to be easier to detect as the evidence to see a deletion is staightforward. You want to look for three main peices of evidence. First is a drop in the read depth. This drop would likely be 50% of the read depth around for a heterozygous mutation and 100% of the read depth for a homozygous mutation. Second is insert size. If the two reads span the deletion, there is more genomic infomation between the reads when aligning to the reference, resulting in a insert size larger than expected, or them being label red. Finally there are soft clips. the soft clips should be inward and show the seqeunce at the other soft clip.
 
 ![Screenshot of empty igv window](/Images/SV_DEL.png)
