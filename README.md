@@ -268,14 +268,31 @@ how would you label the following mutations in `WGS_001_Father`. All the followi
 </details>
 
 # Identifying large sturcural variants in IGV 
-Strucutral variants are the most complicated to detect in IGV because most sequencing is short read, and thus do not span the entire read. Therefore IGV is unable to directly show you the mutation, and rather you must use clue to infer the presense of an SV. Thus this guide will go over the major SV's you may run into along with how they will appear in IGV. For more detail, including how visualze comxplex stuctual variants, refer to the following slides. ([Visualize common SVs](https://docs.google.com/presentation/d/13rQ7rrYeOpSAon3BPFgQPzYyYhBAPeLo_uVq0ET3s7E/edit?usp=sharing), [Visualize complex SVs](https://docs.google.com/presentation/d/1dCcq4Rq3-AJASmq7eK62l8YLsMMCMNWzQjSJYnHTcgo/edit?usp=sharing))
+Strucutral variants are variants impacting more than 50 bases. thay are the most complicated to detect in IGV because most sequencing is short read, and thus do not span the entire read. Therefore IGV is unable to directly show you the mutation, and rather you must use clue to infer the presense of an SV. Thus this guide will go over the major SV's you may run into along with how they will appear in IGV. For more detail, including how visualze comxplex stuctual variants, refer to the following slides. ([Visualize common SVs](https://docs.google.com/presentation/d/13rQ7rrYeOpSAon3BPFgQPzYyYhBAPeLo_uVq0ET3s7E/edit?usp=sharing), [Visualize complex SVs](https://docs.google.com/presentation/d/1dCcq4Rq3-AJASmq7eK62l8YLsMMCMNWzQjSJYnHTcgo/edit?usp=sharing))
 
-##Overview of evidence
-All the peices of evidence you will want to use have been mentioned before in this guide but here we will consolidate it to one place
-### Read depth
-Read depth is the number of reads that cover an indivudalze base. Any read that align over a base will increase the read depth unless it is a soft clip at that location. The read depth is shown in IGV as the grey bar at the top of bam file track. For variants that either duplicate or deleate regions of the genome there will be a change in the read deptj
+## Overview of evidence
+All the peices of evidence you will want to use have been mentioned before in this guide but here we will consolidate it to one place. For a visual example of each piece of evidence refer to the image below
+
+![Screenshot of empty igv window](/Images/IGV_Evidence.png)
+
+### Read Depth
+Read depth is the number of reads that cover an indivudalze base. Any read that align over a base will increase the read depth unless it is a soft clip at that location. The read depth is shown in IGV as the grey bar at the top of bam file track. For variants that either duplicate or deleate regions of the genome there will be a change in the read depth that match the genomic contect getting added or removed. However read depth may not always be a sharp change such as in the image above. In a repeat or duplicated region a read spaning deleted/duplicated region may look very similar to if the variant was not there. This tends to result is a gradual increase or decrease in the read depth 
 ### Soft Clips
-Soft clips are parts of a indivudual read
+Soft clips, also known as split reads, are parts of a indivudual read that have the genomic contect of a different location. This can occure when a read spans the breakpoint, or boundry, of a variant. This makes soft clips very usful in idenfying the exact coordinates of a variant. However, like with read depth. of the variant is in a duplicate or repeat region there may not be a soft clip. As it is valuable ti know where the soft clip sequence is from BLAT is a very powerful tool in understanding soft clips.
+### Insert Size
+Insert size refers to the distance between the two paired reads in short read seqeuncing. For most SRS, this value tends to be around 300 bases, give or take 100 bases. However where there is a structural variant in the region of the read, it can result in the distance between the two reads, when aligned to the reference, being much larger or small than expect. In a read in labled in blue it means this distance is smaller that expect, and when it is red it is larger than expected. In addition, if the two reads align to different chromosome instead of bing clolred red or blue, it will be colored based on the chromosome of the pair.
+### Pair-end Orientation
+in Short read sequencing the first read is sequence from 5' to 3' and the second read is sequence 3' ot 5'. A read in the 5' to 3' direction is refered to as being in the left direction (don't ask why), and the 3' to 5' read is in the right direction, meaning the pair together is LR. This is the pair end orinetation. However large variants can chnage this orientation, resulting in RL, LL and RR reads. These are label as green, cyan, and blue respectivly
+
+With these four peice of evidence established we will now go into detail into the main five kinds of variants, deletions, duplications, inversion, insertions, and translocation. It is imprtant to not just understand the evidence but understand why the evidence looks this way so make sure to spend time understanding how the signal occurs.
+
+##Deletion
+A deletion is a remove of a large segment of the genome. They tend to be easier to detect as the evidence to see a deletion is staightforward. You want to look for three main peices of evidence. First is a drop in the read depth. This drop would likely be 50% of the read depth around for a heterozygous mutation and 100% of the read depth for a homozygous mutation. Second is insert size. If the two reads span the deletion, there is more genomic infomation between the reads when aligning to the reference, resulting in a insert size larger than expected, or them being label red. Finally there are soft clips. the soft clips should be inward and show the seqeunce at the other soft clip.
+
+![Screenshot of empty igv window](/Images/SV_DEL.png)
+
+In the image above note the blat alignment at the bottom shows the Soft clip sequence by the left soft clip coresponds with ref sequence by right soft clip and vice versa. In addition, doing a blat aligment of the entire read with the soft clip show the gap. This evidence, with the red Insert size reads and complete loss in read depth, conferms this is a homozygous deletion
+
 # QUIZ TIME!
 
 
