@@ -293,6 +293,16 @@ A deletion is a remove of a large segment of the genome. They tend to be easier 
 
 In the image above note the blat alignment at the bottom shows the Soft clip sequence by the left soft clip coresponds with ref sequence by right soft clip and vice versa. In addition, doing a blat aligment of the entire read with the soft clip show the gap. This evidence, with the red Insert size reads and complete loss in read depth, conferms this is a homozygous deletion
 
+## Duplications
+unsuprisingly, a duplicated region of the genome in IGV looks like the opposite of a deletion. You should see an increase in the read depth are there are more reads from the udplicated regeion. You should also see blue insertisze lables showing the reads are close than expected as the duplicated regions between two reads is not in the reference, resukting in the two reads being closer. You will aslo see outward soft clips of the other breakpoint corresponding with reads spanning the boundtry between the two duplicated regions. The  only additional peice of evidence is green pair end orientations showing RL oritentions. This occures because if a read is from the end of the first duplication and itsd pair sequrnces the start of the second duplication, the second read will map to beofre the first read. All this evidence together could look like the following
+
+![Screenshot of empty igv window](/Images/IGV_Evidence.png)
+
+it is important to note most duplications, and in fact most variants, will not show all the posible evidence. For isntace is the duplication is too small there will not be pair end orinetation. Or if the duplication is too big the reafs wont be able to span the duplication, so there wont be insert size evidence. It is important to consider the evidence pressent in IGV and see which, if any, of the variant types match the evidence the best.
+
+## Inversion
+An inversion is when a region of the genome flips directions. Thus the end of the region becomes the start and vise versa. An important consiquence of this is since the 3' end goes to the 5; end, but the stand is still 5' to 3'. it will flip to the compe,entay starnd. As there is not genomic information gained or lost there sdhould not be a read depth chnage. They could be inser size evidence based on how big the inversion is, meaning the reads could be blue or red. The most imnportsnt evdidece is soft clips on both sides of the break points and RR and LL pair end orientation. However since inversion most comply occure from crossover between similar sequences in the genome, soft clips may not always occur
+
 # QUIZ TIME!
 
 
