@@ -303,9 +303,51 @@ it is important to note most duplications, and in fact most variants, will not s
 ## Inversion
 An inversion is when a region of the genome flips directions. Thus the end of the region becomes the start and vise versa. An important consiquence of this is since the 3' end goes to the 5; end, but the stand is still 5' to 3'. it will flip to the compe,entay starnd. As there is not genomic information gained or lost there sdhould not be a read depth chnage. They could be inser size evidence based on how big the inversion is, meaning the reads could be blue or red. The most imnportsnt evdidece is soft clips on both sides of the break points and RR and LL pair end orientation. However since inversion most comply occure from crossover between similar sequences in the genome, soft clips may not always occur
 
+![Screenshot of empty igv window](/Images/SV_INV.png)
+
+In this case there are no break point outward at the first breakpoint. There is also a chnage in the read depth in this region. Abnormalizties like these are common in inversions, however the LL and RR reads, along with the soft clip sequences being found in the nearby region is enough to be sure this is an inversions
+
+## Translocation
+A translocation is a swap between genomic content in two chromosome. They are the only<sup>*</sup> variant where is igv you will only see one breakpoint. At this breakpoint you should see soft clips om both sides. Finally there should be many reads who's mate is maped to a different chomosome, and this should all be the same chromosome. In addition, since this impacts two chromosomes you should see similat signal at the other chrosmosme.
+
+![Screenshot of empty igv window](/Images/SV_CTX_1.png)
+![Screenshot of empty igv window](/Images/SV_CTX_2.png)
+
+Note we need two images. One from chromosome 12, one from chomosome 13. In each of these we see the same color for the reads, the ones in chr12 are the color for chr13 and vise versa. This is the defining singal for a translocation. Also note this is not a screenshot from WGS001_Father like everything prior. This is because translocations are extremmly rare. This is the only sample I have access to (out ouf 100+) that I knew had a translocation. Keep this in mind if you thing you see a translocation or are trying to conferm one.
+
+## Insertion
+We have saved insertions for last because they are the most complex to see. Insertions are added bases to a chromosome, either from elsewere in the genome or are random sequences. The complexity comes from multiple mechanisms that case reuslt in insertions and how the signal can look very similar to other variants. In general the read depth will not change in an insertions. However based on the mechansims there can also be a deletion of a few bases or duplication of an insert site. However these then to be small, for sure less than 50 bases. Thus if you see a read deth chnage of less than 50 bases thjink insertions, however the lact of a read depth chnage could also me insetion. The pair end orientation and insert size can also be anything based on where the inserted sequence is from and how large it is. In general this evidence is harder to use for insertions. Finally you will see soft clips om both side of the break point(s). Thus insertions can look like any of the following
+
+![Screenshot of empty igv window](/Images/SV_INS_RANDOM.png)
+![Screenshot of empty igv window](/Images/SV_INS_DEL.png)
+![Screenshot of empty igv window](/Images/SV_CTX_2.png)
+
+Note the seauence `GCCTGAAATGATCTTCCTCCGTCTTACCTATGAACTGGTCCTATCTTCCCTCTTCATTCACAAATATTCATTAGGTGC` that is present in both soft clips of the first screenshot. This is the inserted sequence. Looking at the reads and removing this sequence you will see it matches the reference seqeunce with a duplciatetion of the insert size (which is why we see the read depth increase) This is the classic signal for an insertion of a random sequence. It can be confermed the inserted sequence is random since trying to blat the soft clip will have no strong matches
+
+the seciond screenshot is the same case as the first, however instead of a insert size tuplication a few bases have been deleted. This is likely due to non-homologous end joining but is another case of an insertions
+
+The thrid screenshot is the classic example of a mobile element insertion. MEI alwasy have insert site duplications and tend to have reads whos mate maps to a different chromosome but not a consitent chromosome. This is becuase they are each mapping to a different instance of the same tranposible lement thought the genome
+
+![Screenshot of empty igv window](/Images/SV_INS_1_12_image_1.png)
+![Screenshot of empty igv window](/Images/SV_INS_1_12_image_2.png)
+
+These last two images show the same insertion. Note the conistent color of the reads showing their mate maps to a diffent chrmosome. In the first image these are maping to chr12. Going to this region in chr12 we see the second image, where they map to chr1. 
+In the second image however it does not look like an insertion at the breakpoints are far away from eachother. This is how we know it is an insertion and not a translocation. the region between the two break points in chr12 has been inserted in chr1
+
+## False Positives
+Due to short read sequencings difficulty with SV detection it can have a high false positive rate. Thus it is important to know how false positives can occure. There are two main situations
+
+False psotive usally a cause by repedtive regions of the genome. The conistent way to know it is a false positive if by looking at the soft clips. If it is a true positive the soft clip should be consitent for all the reads. However in these two images we don't see a consitent sequence. This means these are false positives and should be distcarded
+
 # QUIZ TIME!
+It can be very difficult to understand how to visualzie variants without proacice, so go though the 20 cases in `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Mother_UDN613923.practice.vcf`. These all represent regions in `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Mother_UDN613923.bam`. Label them are true positives or false positves, and if they are true positives label what variant class they are (SNV, indel, or SV), how frequent they are in the genome (somatic, heteroygous, or homozygous) and for indels and SVs what kind they are (insertions, deletion, duplication, inversion, or translocation). 
 
+Two  notes about labeling
+-  a somatic variant will be one in less than 30% of reads
+-  a indel will be 50 bases or less, with a sturcutal variant being 51 bases or more
+Keep in mind these defentions can change based on the project so don't use these thereshold exactly going forward. This is just to provide coinsitnct in how we label the variants
 
+After analysing those 20 variants go to `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Mother_UDN613923.answerkey.vcf` to see the answer. feel free to check in with Andrew if you have any discrpecencies between your labeling and the answer key.
 
 
 
