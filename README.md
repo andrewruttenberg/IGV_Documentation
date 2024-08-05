@@ -132,37 +132,40 @@ A few of the most useful options are:
 
 
 ### Coloring reads
-like grouping and sorting reads, `color reads by` is an option by right clicking the bam file and have various options for how to color the reads. 
+Like grouping and sorting reads, `Color Reads By` is an option available by right-clicking the BAM file and provides various options for coloring the reads.
 
-Some of the mosty commonly used options are
-- insert size: read pairs with a larger than expected distance between the two reads and smaller than expected distance will be colored red and blue respecitvly. This is useful in idenifying various structual variants.
-  - to know the exact insert size of two reads click on the read and look for the value next to `insert size`
-    - if the value is negitive that means you clicked on the second of the two reads. The absolute value will be the insert size 
-- pair end orientation: colors forward reverse reads (FR) grey (no color), RF Green, FF cyan, and RR Blue. This will also color each read where the pair is mapped to a different chromosome by various colors depending on the chomosome
-  - Note there is an option ti color by insert size and pair end orientation. This works well for seeing both peices of information, but suffers from in a read has an abnosmal insert size and not a FR pair end orientation it will color the read by the pair end orientation, not the insert size. It is for that reason I recommended coloring by only insert size and grouping by pair end orientation, it allows you to see both peices of information at the same time   
+Some of the most commonly used options are:
 
-  For group aligments, sort aligments, and color aligments there are many more options so feel free to play around with the choices to see if there are additions options that will work with how you are trying to use IGV
+- Insert Size: Read pairs with a larger or smaller than expected distance between the two reads will be colored red and blue, respectively. This is useful in identifying various structural variants.
+  - To know the exact insert size of two reads, click on the read and look for the value next to Insert Size.
+    - If the value is negative, that means you clicked on the second of the two reads. The absolute value will be the insert size.
+- Pair-End Orientation: Colors forward-reverse reads (FR) grey (no color), RF green, FF cyan, and RR blue. This will also color each read where the pair is mapped to a different chromosome by various colors depending on the chromosome.
+  - Note that there is an option to color by both insert size and pair-end orientation. This works well for seeing both pieces of information but suffers from the issue that if a read has an abnormal insert size and not a FR pair-end orientation, it will be colored by the pair-end orientation, not the insert size. For this reason, I recommend coloring by only insert size and grouping by pair-end orientation. This allows you to see both pieces of information at the same time.
+
+For grouping alignments, sorting alignments, and coloring alignments, there are many more options, so feel free to explore the choices to see if there are additional options that will work with how you are trying to use IGV.
 
 ### Showing bases
-There are a few different controls users have over what bases are shown and how they look. You can change these seting by right clicking the bam file
-- `show all bases`: if this is checked than instread of seeing grey lines for you reads you will see the exact sequence at every base for every reads. I persoanlly find this to be too much information at once and rarly use it, but is can be helpful if you need to know the exact seqence of a specificly region that is larger than the mismatched bases
-- `show mismatched bases`: having this option selected will show a grey bar for any base in a read that matches the reference sequence, and will show the exact bases if it does not match the reference. I find this setting the most useful as more often then not we are only intrested in variations from the reference.
-   - Note: unless you selected `show soft-clipped bases` as descriped earlier, this will only show you when an indivual bases differs from the reference. You must have this option selected and have it set up to show sloft clips in order to be able to see the soft clips
-- `shade base by quality`: This will shade any shown bases (not the grey bar) bases on how cofiudenct the sequencing of that base is. The closer the base looks to grey the less confidnet the sequencing is. To see the exact quality of the seuqenbciong of the base click on the base and look for the number next to `QV`
+There are a few different controls users have over what bases are shown and how they look. You can change these settings by right-clicking the BAM file:
 
+- Show All Bases: If this is checked, instead of seeing grey lines for your reads, you will see the exact sequence at every base for every read. I personally find this to be too much information at once and rarely use it, but it can be helpful if you need to know the exact sequence of a specific region that is larger than the mismatched bases.
+- Show Mismatched Bases: Selecting this option will show a grey bar for any base in a read that matches the reference sequence and will show the exact bases if it does not match the reference. I find this setting the most useful, as we are often only interested in variations from the reference.
+  - Note: Unless you select `Show Soft-Clipped Bases` as described earlier, this will only show you when an individual base differs from the reference. You must have this option selected and have it set up to show soft clips in order to see the soft clips.
+- Shade Base by Quality: This will shade any shown bases (not the grey bar) based on how confident the sequencing of that base is. The closer the base looks to grey, the less confident the sequencing is. To see the exact quality of the sequencing of the base, click on the base and look for the number next to `QC`.
 ### View as pairs
 Another useful setting you can turn on and off by right clicking the bam file is `View as pairs`. Turning this on will put the two readsn in the read pair on the same row and show a grey line connecting them. This is useful as it lets to manually see the instert size and if it is larger or smaller than expected. If you want to sort by insert size to see if there is any variation it is highly recommended you turn on this setting first. One downside is it makes it harder to group reeads overlapping the same sequence together, making it harder to see SNVs or soft clips
 
-### challange.
-Can you make your IGV look like this
+### Challange.
+Can you make your IGV look like this?
 Show some image
 
 ## BLAT
-Mutations are commonly a result of genomic rearagments, meaning mutations come from other locations in the genome. Thus is can be exreemly useful the find the most likely location for a genomic sequnece from the reference sequence. This is useful as the location a read maps to is not always the seqence of the reference genome it matches the best. The best way to map a sequence to the reference is using BLAT. Thankfully BLAT is built into IGV, making it easy to use. This section will go over the easier ways to BLAT a seqence
+Mutations are commonly a result of genomic rearrangements, meaning mutations come from other locations in the genome. Thus, it can be extremely useful to find the most likely location for a genomic sequence from the reference sequence. This is useful because the location a read maps to is not always the sequence of the reference genome it matches the best. The best way to map a sequence to the reference is using BLAT. Thankfully, BLAT is built into IGV, making it easy to use. This section will go over the easiest ways to BLAT a sequence.
+
 ### Using BLAT on a user defined sequence.
-The most basic way to use BLAT is to input a sequence and BLAT will tell you where in the reference best matches that seqence. To use BLAT this way go to `Tools->BLAT`. You should now be prompted to "enter a sequence to blat" Type in your sequence and press "OK" to run blat on that seqence.
-- Note 1: Blat always requires a reference sequence to check the inout sequence against. In IGV this sequence will always be the reference assembly selected. To change the refernece use for blat you  us chnage the refernce assembly in the top left corenr.
-- Note 2: Due to the low complexity of DNA only have 4 base option, the sequence you input must be at least 20 bases
+The most basic way to use BLAT is to input a sequence, and BLAT will tell you where in the reference sequence best matches that sequence. To use BLAT this way, go to `Tools -> BLAT`. You should be prompted to `Enter a sequence to BLAT`. Type in your sequence and press `OK` to run BLAT on that sequence.
+
+- Note 1: BLAT always requires a reference sequence to check the input sequence against. In IGV, this sequence will always be the reference assembly selected. To change the reference used for BLAT, you must change the reference assembly in the top-left corner.
+- Note 2: Due to the low complexity of DNA, which only has 4 base options, the sequence you input must be at least 20 bases long.
 ### Challenge
 where in refernce assembly hg38 does the following sequence best match. `TATTTTAGTACATATATGTAATTCACAAATAAATGAATATATAAATATTTGTAGAGTGTGCCTAAAATTTATAACTGATAGTACATGTAATCAGTCAAGGTTAAGGACTCTGCTATCTTCCCGCGACTGGGCCCAAATCCCTAATGGAGAG`
 <details><summary>Answer</summary>
@@ -170,7 +173,8 @@ where in refernce assembly hg38 does the following sequence best match. `TATTTTA
 </details>
 
 ### Finding the most likely location for a read
-Another useful think you can do in IGV is run a BLAT search on the sequence of a read. This can be useful as reads don't away align to the place they match most, insteads aligning differenty based on the aligment of its pair. It is also useful as there are many reapst region or simular sequnces in the genome and knowing a read has other simlar matches can be usful in variatn detection. Finally if the read spans a deletion compared to the refernce sequence, blating the read will show you the deletion. To run a BLAT search on a read right click the read and select `BLAT read sequence` 
+Another useful thing you can do in IGV is run a BLAT search on the sequence of a read. This can be useful because reads don't always align to the place they match most, instead aligning differently based on the alignment of their pair. It is also useful because there are many repeat regions or similar sequences in the genome, and knowing a read has other similar matches can be useful in variant detection. Finally, if the read spans a deletion compared to the reference sequence, BLATting the read will show you the deletion. To run a BLAT search on a read, right-click the read and select `BLAT Read Sequence`.
+
 ### Challenge 
 Set your window to `chr1:105963222-105963498`. You should see multiple red reads in the RL track (see below). Blat on of these red reads. About how many different aligments havew a score greater than 600
 <details><summary>Answer</summary>
@@ -178,15 +182,15 @@ Set your window to `chr1:105963222-105963498`. You should see multiple red reads
 </details>
 
 ### Searching Soft clips with blat
-lastly, and arguably more usefully, you can use blat to search a soft clip. To do so again right click on the read with the soft clip, and select `BLAT left-clipped sequence` or `BLAT right-clipped sequence` depending on which side of the read has the soft clip. keep in mind that the soft clip must be at least 20 bases to be used as an input for blat, so the option will not show up if there is not a coft clip long enough
+Lastly, and arguably more usefully, you can use BLAT to search a soft clip. To do so, right-click on the read with the soft clip and select `BLAT Left-Clipped Sequence` or `BLAT Right-Clipped Sequence` depending on which side of the read has the soft clip. Keep in mind that the soft clip must be at least 20 bases long to be used as input for BLAT, so the option will not show up if there is not a soft clip long enough.
 
 ### challenge
-Go to the window chr6:68,014,727-68,015,341. On the left side of the screen should be right soft-clips. On the right should be left soft clips. Right click on the reads with left cloft clips. Where does it best align to
+Go to the window `chr6:68,014,727-68,015,341`. On the left side of the screen should be right soft-clips. On the right should be left soft clips. Right click on the reads with left cloft clips. Where does it best align to
 <details><summary>Answer</summary>
   &emsp; &ensp; Depending of the read you selected the end position could be different, but the start position should be chr6:68015268. Follow up question. Note how close this is the the read itself. What could that mean. If you are unsure come back to thsi question afetr finishing the guide and you should be able to answer the question.
 </details>
 
-With this you should have enough information for most tasks you would want to accompish in IGV. Keep in mind there are many other tools not discussed in this guide. It is highly recommend to expirence with other tools to see what else you can do. For more information of what you can accomplish using IGV, refer to [this](https://igv.org/doc/desktop/#UserGuide) guide
+With this, you should have enough information for most tasks you would want to accomplish in IGV. Keep in mind there are many other tools not discussed in this guide. It is highly recommended to experiment with other tools to see what else you can do. For more information on what you can accomplish using IGV, refer to [this](https://igv.org/doc/desktop/#UserGuide) guide
 
 # Identifying single nueclotide variants in IGV 
 As will all variant confermation in IGV, you will need a vcf of candidate variants to either conferm as true positives or label as false positive. For this example the candidate SNVs can be found at `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Father_UDN121697_snvs_chr1.vcf`
