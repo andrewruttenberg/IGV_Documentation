@@ -193,28 +193,27 @@ Go to the window `chr6:68,014,727-68,015,341`. On the left side of the screen sh
 With this, you should have enough information for most tasks you would want to accomplish in IGV. Keep in mind there are many other tools not discussed in this guide. It is highly recommended to experiment with other tools to see what else you can do. For more information on what you can accomplish using IGV, refer to [this](https://igv.org/doc/desktop/#UserGuide) guide
 
 # Identifying single nueclotide variants in IGV 
-As will all variant confermation in IGV, you will need a vcf of candidate variants to either conferm as true positives or label as false positive. For this example the candidate SNVs can be found at `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Father_UDN121697_snvs_chr1.vcf`
-In addition make sure you have `Show mismatched bases` on to be able to see the variants
+As with all variant confirmation in IGV, you will need a VCF of candidate variants to either confirm as true positives or label as false positives. For this example, the candidate SNVs can be found at `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Father_UDN121697_snvs_chr1.vcf`.
+In addition, make sure you have Show mismatched bases on to be able to see the variants.
 
-idenfitication of SNVs is extreemly straight forward as IGV will label when there is an snv or not. The basis of SNV idneification is you go to the location of a canidiate SNV and see how many of the reads at that position show the alternative allele. For a heterozygous mutation is should be about 50% of the reads. For a homozygous case it should be 100% of the reads. These two cases can be seen below.=
+Identification of SNVs is extremely straightforward as IGV will label when there is an SNV or not. The basis of SNV identification is to go to the location of a candidate SNV and see how many of the reads at that position show the alternative allele. For a heterozygous mutation, it should be about 50% of the reads. For a homozygous case, it should be 100% of the reads. These two cases can be seen below.
 
 ![Screenshot of empty igv window](/Images/Heterozygous_SNV.png)
 
 ![Screenshot of empty igv window](/Images/Homozygous_SNV.png)
 
-The top screenshot show the case of a heterzygous mutation, where the alt allele A is in about 50% of the reads, and the refernce allele G is in the other 50%. The lower screenshot shows a homozygous mutation where the alt allele C is in all the reads and the reference G is not seen at all
+The top screenshot shows the case of a heterozygous mutation, where the alt allele A is in about 50% of the reads, and the reference allele G is in the other 50%. The lower screenshot shows a homozygous mutation where the alt allele C is in all the reads and the reference G is not seen at all.
 
-To get the exact percentage of reads with the alternatvie read click the base in the read depth track (in this case it is the green/orange rectangle above the A's and the blue rectangle above the C's respecticly)
+To get the exact percentage of reads with the alternative allele, click the base in the read depth track (in this case, it is the green/orange rectangle above the A's and the blue rectangle above the C's, respectively).
 
-In addition you may see a case like the following
+In addition, you may see a case like the following.
 
 ![Screenshot of empty igv window](/Images/Somatic_SNV.png)
 
-while the signal is a bit messy here (which is common with real data) we can see the majority of the reads match the refenence. However there is a signficant amount of reads that show a C at this base instead of a T. There could be a few explinations for how this occured. Firsly this could be a heterozygous mutations, however the probably of only 14 or less of the 68 reads being the alternate allele are 0.00000042, which is highly unlikely. It could be sequencing error as well, however SRS has a relitivly low error rate of about 1% (depending on the sequencing tool), so the odds of the same sequencing error occuring 14 times in 68 reads is again extremly low. Thus the most likely explination is it is a somatic mutation, or a mutation that is not in all cells. There is no hard cutoff percentige for somatic vs heterozygous vs homozygous so you will need to decide beforehand how to will classify them.
+While the signal is a bit messy here (which is common with real data), we can see that the majority of the reads match the reference. However, there is a significant number of reads that show a C at this base instead of a T. There could be a few explanations for how this occurred. Firstly, this could be a heterozygous mutation; however, the probability of only 14 or fewer of the 68 reads being the alternate allele is 0.00000042, which is highly unlikely. It could be a sequencing error as well, but SRS has a relatively low error rate of about 1% (depending on the sequencing tool), so the odds of the same sequencing error occurring 14 times in 68 reads is again extremely low. Thus, the most likely explanation is that it is a somatic mutation, or a mutation that is not in all cells. There is no hard cutoff percentage for somatic vs. heterozygous vs. homozygous, so you will need to decide beforehand how you will classify them.
 
 ### challenge
-how would you label the following mutations in `WGS_001_Father`. All the following mutations can be found in `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Father_UDN121697_snvs_chr1.vcf`
-
+How would you label the following mutations in `WGS_001_Father`? All the following mutations can be found in `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Father_UDN121697_snvs_chr1.vcf`
 1. chr1:72008005
 2. chr1:72011871
 3. chr1:72022965
@@ -228,41 +227,45 @@ how would you label the following mutations in `WGS_001_Father`. All the followi
 
 1. Homozygous
 2. Heterozygous
-3. Somatic (37% of the reads showing the alt allele in a heterouzygous is unlikely, but very possible. Depending on your criteria a clasifction of heterozugous or somatic could be appopriate)
+3. Somatic (37% of the reads showing the alt allele in a heterozygous mutation is unlikely but very possible. Depending on your criteria, a classification of heterozygous or somatic could be appropriate.)
 4. Heterozygous
-5. heteroygous and somatic (the T-> Mutation appears to be heterozygous and the Y->G mutatation looks somatic being in 3% of reads)
+5. Heteroygous and somatic (the T->C Mutation appears to be heterozygous and the T->G mutatation looks somatic being in 3% of reads)
 6. Homozygous
 7. mutliallelic heterozygous(one chromosome is A->C, the other is A->T)
 </details>
 
 # Identifying small indels in IGV 
-Indels can be broken down into insertions and deletions. Most of the time indels are able to be clearly seen in IGV. However there may be some edge cases that are more difficult to be able to see. we will go over all these cases the the section below. In addition there are a few settings that must be on to detect the indels. Like with SNVs `Show mismatched bases` must be on. In addition make sure `label indels > theshold` checked and `Label threshold (bases)` set to 0. Finally concerm that `shows soft-clipped bases` is check. For the last two setting they can be found in `view->preferences->alignments`
+Indels can be broken down into insertions and deletions. Most of the time, indels are clearly visible in IGV. However, there may be some edge cases that are more difficult to see. We will go over all these cases in the section below. Additionally, there are a few settings that must be enabled to detect the indels. Like with SNVs, `Show mismatched bases` must be on. Also, make sure `Label indels > threshold` is checked and `Label threshold (bases)` is set to 0. Finally, ensure that `Show soft-clipped bases` is checked. For the last two settings, they can be found in `View -> Preferences -> Alignments`.
 
 ## insetions
-insertions occurer when there are new bases inserted between two bases in the reference sequence. These can be seen in IGV by looking for purple bars with white numbers on them in the reads (see below). The location in the read will always be between two bases, showing when the seuqnece is instered into the DNA, and the number rep[resents how many bases are insterted. To see the exact seqeunce instered click on the purple bar
+Insertions occur when new bases are inserted between two bases in the reference sequence. These can be seen in IGV by looking for purple bars with white numbers on them in the reads (see below). The location in the read will always be between two bases, indicating where the sequence is inserted into the DNA, and the number represents how many bases are inserted. To see the exact sequence inserted, click on the purple bar.
 
 ![Screenshot of empty igv window](/Images/indel_insertions.png)
 
 ## Deletions
-Deletions occure when a small sequence of DNA is removed compared to the reference sequence. Like with indels IGV will directly show these on the reads. In this case a part fo the read will be replaced with a black line with a purple number. That number again shows the number of bases missing. To get the sequence missing you can look at the sequence track and see what bases the gap overlaps
+Deletions occur when a small sequence of DNA is removed compared to the reference sequence. Like with insertions, IGV will directly show these on the reads. In this case, a part of the read will be replaced with a black line and a purple number. That number indicates the number of bases missing. To get the sequence missing, you can look at the sequence track and see what bases the gap overlaps.
 
 ![Screenshot of empty igv window](/Images/indel_deletion.png)
 
-Like with SNVs, indels can be catadoaired as heterozygous, homozygous, or somatic, based on the AF. However unlike with SNVs these is no easy way to get the exact number of reads that show the mutation without manually counting it. For deletions you could compare the read depth outside the mutation vs inside the mutations, but these values are subject to noise and misaligment making them not the most reliable. In addition keep in mind that indels in multiple locations could be the same indel if the regeon is a repeat.
+Like with SNVs, indels can be categorized as heterozygous, homozygous, or somatic based on the allele frequency (AF). However, unlike SNVs, there is no easy way to get the exact number of reads showing the mutation without manually counting them. For deletions, you could compare the read depth outside the mutation versus inside the mutation, but these values are subject to noise and misalignment, making them less reliable. Additionally, keep in mind that indels in multiple locations could be the same indel if the region is a repeat.
 
 ![Screenshot of empty igv window](/Images/indel_repeat_regeion.png)
 
-In this screenshot IGV shows a deletion of the sequence `TTTTTC` from chr1:155568828-155568833. However this region is a repeat of that `TTTTTC` sequence, so it is imporible to know which repeat is missing. Thus if the deletion was labeled from chr1:155568834-155568839 it would be refering to the same indel
+In this screenshot, IGV shows a deletion of the sequence `TTTTTC` from `chr1:155568828-155568833`. However, this region is a repeat of the `TTTTTC` sequence, so it is impossible to know which repeat is missing. Thus, if the deletion was labeled from `chr1:155568834-155568839`, it would be referring to the same indel.
 
-Finally for larger indels (by defenution indels cannot be larger than 50 bases otherwise they would be catoigrozied as a structual variant) is is possible for a read to not span the entire mutation. This prevent IGV from showing the SV. instead you will see soft clips at the end of the read.
+Finally, for larger indels (by definition, indels cannot be larger than 50 bases; otherwise, they would be categorized as structural variants), it is possible for a read to not span the entire mutation. This prevents IGV from showing the SV. Instead, you will see soft clips at the end of the read.
 
 ![Screenshot of empty igv window](/Images/indel_del_with_soft_clips.png)
 ![Screenshot of empty igv window](/Images/indel_ins_with_soft_clips.png)
 
-In these two examples we can see most of the reads label the indel. Howeverm some of the reads just shiow a sequence of mismatched bases at the end. This is a soft clip. With IGV is saying is up to a point this read is aligning with the reference sequence here, but at the soft clip it is no longer a match. For the deletion we can see the soft clip sequence (the bases in the read) corresponds with the sequnce after the labeled indel. This matches with the other reads showing the indel as all the reads show the consesnus sequence with those 6 bases missing. IGV is just unabel to label the indel on these reads because it does not have enough of the sequence following to be sure the soft clip seqeucne comes from that region. In the insertions we can see it is an sertion of the bases `CA`. However IGV shows more than those bases in the soft clip. However looking at the soft clip seqeucne we see the `CA` following the expected reference sequence before the indel. This matches with the other indels as it shows the reference seqeunce before the indel, followed by the indel lequence, and then the referecne sequence after the indel (sequence after is not shown since it is aigming with the reference) Again it is shown as a soft clip rather than an indel since IGV does not have enough of the sequence before the indel to be sure that is where the sequence is from. Keep this in mind if you are visuaklizing indels and you see soft clips rather than indel markers.
+In these two examples, we can see that most of the reads label the indel. However, some of the reads just show a sequence of mismatched bases at the end. This is a soft clip. What IGV is indicating is that up to a certain point, this read is aligning with the reference sequence, but at the soft clip, it is no longer a match.
 
-### challenge
-how would you label the following mutations in `WGS_001_Father`. All the following mutations can be found in `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Father_UDN121697_indels_chr1.vcf`
+For the deletion, the soft clip sequence (the bases in the read) corresponds with the sequence after the labeled indel. This matches with the other reads showing the indel, as all the reads show the consensus sequence with those 6 bases missing. IGV is unable to label the indel on these reads because it does not have enough of the sequence following the soft clip to be sure that the sequence is from that region.
+
+In the case of insertions, we can see that it is an insertion of the bases CA. However, IGV shows more than those bases in the soft clip. Looking at the soft clip sequence, we see the CA following the expected reference sequence before the indel. This matches with the other indels, as it shows the reference sequence before the indel, followed by the indel sequence, and then the reference sequence after the indel (the sequence after is not shown since it is aligning with the reference). Again, it is shown as a soft clip rather than an indel since IGV does not have enough of the sequence before the indel to be sure that is where the sequence is from. Keep this in mind if you are visualizing indels and see soft clips rather than indel markers.
+
+### Challenge
+How would you label the following mutations in `WGS_001_Father`? All the following mutations can be found in `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Father_UDN121697_indels_chr1.vcf`
 
 1. chr1:28932407
 2. chr1:28947408
@@ -281,47 +284,62 @@ how would you label the following mutations in `WGS_001_Father`. All the followi
 </details>
 
 # Identifying large sturcural variants in IGV 
-Strucutral variants are variants impacting more than 50 bases. thay are the most complicated to detect in IGV because most sequencing is short read, and thus do not span the entire read. Therefore IGV is unable to directly show you the mutation, and rather you must use clue to infer the presense of an SV. Thus this guide will go over the major SV's you may run into along with how they will appear in IGV. For more detail, including how visualze comxplex stuctual variants, refer to the following slides. ([Visualize common SVs](https://docs.google.com/presentation/d/13rQ7rrYeOpSAon3BPFgQPzYyYhBAPeLo_uVq0ET3s7E/edit?usp=sharing), [Visualize complex SVs](https://docs.google.com/presentation/d/1dCcq4Rq3-AJASmq7eK62l8YLsMMCMNWzQjSJYnHTcgo/edit?usp=sharing))
+Structural variants are variants impacting more than 50 bases. They are the most complicated to detect in IGV because most sequencing is short read and does not span the entire mutation. Therefore, IGV is unable to directly show you the mutation, and you must use clues to infer the presence of an SV. This guide will cover the major SVs you may encounter and how they will appear in IGV. For more details, including how to visualize complex structural variants, refer to the following slides: ([Visualize common SVs](https://docs.google.com/presentation/d/13rQ7rrYeOpSAon3BPFgQPzYyYhBAPeLo_uVq0ET3s7E/edit?usp=sharing), [Visualize complex SVs](https://docs.google.com/presentation/d/1dCcq4Rq3-AJASmq7eK62l8YLsMMCMNWzQjSJYnHTcgo/edit?usp=sharing))
 
 ## Overview of evidence
-All the peices of evidence you will want to use have been mentioned before in this guide but here we will consolidate it to one place. For a visual example of each piece of evidence refer to the image below
+All the pieces of evidence you will want to use have been mentioned before in this guide, but here we will consolidate them into one place. For a visual example of each piece of evidence, refer to the image below.
 
 ![Screenshot of empty igv window](/Images/IGV_Evidence.png)
 
 ### Read Depth
-Read depth is the number of reads that cover an indivudalze base. Any read that align over a base will increase the read depth unless it is a soft clip at that location. The read depth is shown in IGV as the grey bar at the top of bam file track. For variants that either duplicate or deleate regions of the genome there will be a change in the read depth that match the genomic contect getting added or removed. However read depth may not always be a sharp change such as in the image above. In a repeat or duplicated region a read spaning deleted/duplicated region may look very similar to if the variant was not there. This tends to result is a gradual increase or decrease in the read depth 
+Read depth is the number of reads that cover an individual base. Any read that aligns over a base will increase the read depth unless it is a soft clip at that location. The read depth is shown in IGV as the grey bar at the top of the BAM file track. For variants that either duplicate or delete regions of the genome, there will be a change in the read depth that reflects the genomic content being added or removed. However, read depth may not always show a sharp change, as seen in the image above. In a repeat or duplicated region, a read spanning a deleted or duplicated region may look very similar to if the variant were not there. This tends to result in a gradual increase or decrease in the read depth.
 ### Soft Clips
-Soft clips, also known as split reads, are parts of a indivudual read that have the genomic contect of a different location. This can occure when a read spans the breakpoint, or boundry, of a variant. This makes soft clips very usful in idenfying the exact coordinates of a variant. However, like with read depth. of the variant is in a duplicate or repeat region there may not be a soft clip. As it is valuable ti know where the soft clip sequence is from BLAT is a very powerful tool in understanding soft clips.
+Soft clips, also known as split reads, are parts of an individual read that contain genomic content from a different location. This can occur when a read spans the breakpoint or boundary of a variant. This makes soft clips very useful in identifying the exact coordinates of a variant. However, similar to read depth, if the variant is in a duplicate or repeat region, there may not be a soft clip. Since it is valuable to know where the soft clip sequence is from, BLAT is a very powerful tool for understanding soft clips.
 ### Insert Size
-Insert size refers to the distance between the two paired reads in short read seqeuncing. For most SRS, this value tends to be around 300 bases, give or take 100 bases. However where there is a structural variant in the region of the read, it can result in the distance between the two reads, when aligned to the reference, being much larger or small than expect. In a read in labled in blue it means this distance is smaller that expect, and when it is red it is larger than expected. In addition, if the two reads align to different chromosome instead of bing clolred red or blue, it will be colored based on the chromosome of the pair.
+Insert size refers to the distance between the two paired reads in short read sequencing. For most short read sequencing (SRS), this value tends to be around 300 bases, give or take 100 bases. However, if there is a structural variant in the region of the read, it can result in the distance between the two reads, when aligned to the reference, being much larger or smaller than expected. If a read is labeled in blue, it means this distance is smaller than expected, and if it is red, it means it is larger than expected. Additionally, if the two reads align to different chromosomes, instead of being colored red or blue, they will be colored based on the chromosome of the pair.
 ### Pair-end Orientation
-in Short read sequencing the first read is sequence from 5' to 3' and the second read is sequence 3' ot 5'. A read in the 5' to 3' direction is refered to as being in the left direction (don't ask why), and the 3' to 5' read is in the right direction, meaning the pair together is LR. This is the pair end orinetation. However large variants can chnage this orientation, resulting in RL, LL and RR reads. These are label as green, cyan, and blue respectivly
+In short read sequencing, the first read is sequenced from 5' to 3', and the second read is sequenced from 3' to 5'. A read in the 5' to 3' direction is referred to as being in the left direction (don’t ask why), and the 3' to 5' read is in the right direction, meaning the pair together is LR. This is the paired-end orientation. However, large variants can change this orientation, resulting in RL, LL, and RR reads. These are labeled as green, cyan, and blue, respectively.
 
-With these four peice of evidence established we will now go into detail into the main five kinds of variants, deletions, duplications, inversion, insertions, and translocation. It is imprtant to not just understand the evidence but understand why the evidence looks this way so make sure to spend time understanding how the signal occurs.
+With these four pieces of evidence established, we will now go into detail on the main five kinds of variants: deletions, duplications, inversions, insertions, and translocations. It is important not just to understand the evidence but also to understand why the evidence looks this way, so make sure to spend time understanding how the signal occurs.
 
 ## Deletion
-A deletion is a remove of a large segment of the genome. They tend to be easier to detect as the evidence to see a deletion is staightforward. You want to look for three main peices of evidence. First is a drop in the read depth. This drop would likely be 50% of the read depth around for a heterozygous mutation and 100% of the read depth for a homozygous mutation. Second is insert size. If the two reads span the deletion, there is more genomic infomation between the reads when aligning to the reference, resulting in a insert size larger than expected, or them being label red. Finally there are soft clips. the soft clips should be inward and show the seqeunce at the other soft clip.
+A deletion is the removal of a large segment of the genome. They tend to be easier to detect because the evidence for identifying a deletion is straightforward. You want to look for three main pieces of evidence:
+1. Read Depth: There will be a drop in the read depth. This drop would likely be about 50% of the read depth around for a heterozygous mutation and 100% of the read depth for a homozygous mutation.
+2. Insert Size: If the two reads span the deletion, there is more genomic information between the reads when aligning to the reference, resulting in an insert size larger than expected. This would be labeled in red.
+3. Soft Clips: The soft clips should be inward and show the sequence on either side of the deletion.
 
+Understanding these pieces of evidence will help in accurately identifying deletions in your data.
 ![Screenshot of empty igv window](/Images/SV_DEL.png)
 
-In the image above note the blat alignment at the bottom shows the Soft clip sequence by the left soft clip coresponds with ref sequence by right soft clip and vice versa. In addition, doing a blat aligment of the entire read with the soft clip show the gap. This evidence, with the red Insert size reads and complete loss in read depth, conferms this is a homozygous deletion
+In the image above, note that the BLAT alignment at the bottom shows that the soft clip sequence by the left soft clip corresponds with the reference sequence by the right soft clip, and vice versa. Additionally, performing a BLAT alignment of the entire read with the soft clip highlights the gap. This evidence, combined with the red insert size reads and the complete loss in read depth, confirms that this is a homozygous deletion.
 
 ## Duplications
-unsuprisingly, a duplicated region of the genome in IGV looks like the opposite of a deletion. You should see an increase in the read depth are there are more reads from the udplicated regeion. You should also see blue insertisze lables showing the reads are close than expected as the duplicated regions between two reads is not in the reference, resukting in the two reads being closer. You will aslo see outward soft clips of the other breakpoint corresponding with reads spanning the boundtry between the two duplicated regions. The  only additional peice of evidence is green pair end orientations showing RL oritentions. This occures because if a read is from the end of the first duplication and itsd pair sequrnces the start of the second duplication, the second read will map to beofre the first read. All this evidence together could look like the following
+Unsurprisingly, a duplicated region of the genome in IGV looks like the opposite of a deletion. You should see:
+1. Increased Read Depth: There will be more reads from the duplicated region, resulting in an increase in read depth.
+2. Blue Insert Size Labels: This indicates that the reads are closer than expected because the duplicated regions between two reads are not in the reference, causing the two reads to be closer together.
+3. Outward Soft Clips: These soft clips show the other breakpoint and correspond with reads spanning the boundary between the two duplicated regions.
+4. Green Pair-End Orientations: Showing RL orientations. This occurs because if a read is from the end of the first duplication and its pair sequences the start of the second duplication, the second read will map before the first read.
 
+All this evidence together could look like the following.
 ![Screenshot of empty igv window](/Images/IGV_Evidence.png)
 
-it is important to note most duplications, and in fact most variants, will not show all the posible evidence. For isntace is the duplication is too small there will not be pair end orinetation. Or if the duplication is too big the reafs wont be able to span the duplication, so there wont be insert size evidence. It is important to consider the evidence pressent in IGV and see which, if any, of the variant types match the evidence the best.
+It is important to note that most duplications, and in fact most variants, will not show all possible evidence. For instance, if the duplication is too small, there may not be pair-end orientation evidence. Conversely, if the duplication is too large, the reads might not span the duplication, so there may be no insert size evidence. It is crucial to consider the evidence present in IGV and determine which, if any, of the variant types best match the evidence observed.
 
 ## Inversion
-An inversion is when a region of the genome flips directions. Thus the end of the region becomes the start and vise versa. An important consiquence of this is since the 3' end goes to the 5; end, but the stand is still 5' to 3'. it will flip to the compe,entay starnd. As there is not genomic information gained or lost there sdhould not be a read depth chnage. They could be inser size evidence based on how big the inversion is, meaning the reads could be blue or red. The most imnportsnt evdidece is soft clips on both sides of the break points and RR and LL pair end orientation. However since inversion most comply occure from crossover between similar sequences in the genome, soft clips may not always occur
+An inversion occurs when a region of the genome flips directions, so the end of the region becomes the start and vice versa. An important consequence of this is that since the 3' end becomes the 5' end, but the strand remains 5' to 3', it will flip to the complementary strand. As there is no genomic information gained or lost, there should not be a change in read depth. 
+
+There could be
+1. insert size evidence: based on how large the inversion is, the reads could be labeled blue or red. The most important evidence for identifying an inversion is
+2. soft clips: Soft clips should be present on both sides of the breakpoints. However, since inversions often occur due to crossover between similar sequences in the genome, soft clips may not always be present.
+3. pair-end orientations: Mosgt inportantly you will see RR and LL pair-end orientations. 
 
 ![Screenshot of empty igv window](/Images/SV_INV.png)
 
-In this case there are no break point outward at the first breakpoint. There is also a chnage in the read depth in this region. Abnormalizties like these are common in inversions, however the LL and RR reads, along with the soft clip sequences being found in the nearby region is enough to be sure this is an inversions
+In this case, there are no breakpoints outward at the first breakpoint, and there is also a change in the read depth in this region. Abnormalities like these are common in inversions. However, the LL and RR reads, along with the soft clip sequences being found in the nearby region, are sufficient to confirm that this is an inversion.
+
 
 ## Translocation
-A translocation is a swap between genomic content in two chromosome. They are the only<sup>*</sup> variant where is igv you will only see one breakpoint. At this breakpoint you should see soft clips om both sides. Finally there should be many reads who's mate is maped to a different chomosome, and this should all be the same chromosome. In addition, since this impacts two chromosomes you should see similat signal at the other chrosmosme.
+A translocation is a swap between genomic content on two chromosomes. They are the only variant where, in IGV, you will see only one breakpoint. At this breakpoint, you should see soft clips on both sides. Additionally, there should be many reads whose mate is mapped to a different chromosome, and these mates should all be on the same chromosome. Since this impacts two chromosomes, you should also see similar signals on the other chromosome.
 
 ![Screenshot of empty igv window](/Images/SV_CTX_1.png)
 ![Screenshot of empty igv window](/Images/SV_CTX_2.png)
@@ -329,38 +347,45 @@ A translocation is a swap between genomic content in two chromosome. They are th
 Note we need two images. One from chromosome 12, one from chomosome 13. In each of these we see the same color for the reads, the ones in chr12 are the color for chr13 and vise versa. This is the defining singal for a translocation. Also note this is not a screenshot from WGS001_Father like everything prior. This is because translocations are extremmly rare. This is the only sample I have access to (out ouf 100+) that I knew had a translocation. Keep this in mind if you thing you see a translocation or are trying to conferm one.
 
 ## Insertion
-We have saved insertions for last because they are the most complex to see. Insertions are added bases to a chromosome, either from elsewere in the genome or are random sequences. The complexity comes from multiple mechanisms that case reuslt in insertions and how the signal can look very similar to other variants. In general the read depth will not change in an insertions. However based on the mechansims there can also be a deletion of a few bases or duplication of an insert site. However these then to be small, for sure less than 50 bases. Thus if you see a read deth chnage of less than 50 bases thjink insertions, however the lact of a read depth chnage could also me insetion. The pair end orientation and insert size can also be anything based on where the inserted sequence is from and how large it is. In general this evidence is harder to use for insertions. Finally you will see soft clips om both side of the break point(s). Thus insertions can look like any of the following
+We have saved insertions for last because they are the most complex to detect. Insertions are additional bases added to a chromosome, either from elsewhere in the genome or as random sequences. The complexity arises from the various mechanisms that cause insertions and how the signal can look very similar to other variants.
+
+In general, the read depth will not change with an insertion. However, depending on the mechanism, there could also be a small deletion or duplication of an insert site, typically less than 50 bases. Thus, if you see a read depth change of less than 50 bases, consider the possibility of an insertion, but remember that the lack of a read depth change could also indicate an insertion.
+
+The pair-end orientation and insert size can vary based on where the inserted sequence is from and how large it is. This evidence is generally harder to use for insertions. Finally, you will see soft clips on both sides of the breakpoint(s). Thus, insertions can look like any of the following.
 
 ![Screenshot of empty igv window](/Images/SV_INS_RANDOM.png)
 ![Screenshot of empty igv window](/Images/SV_INS_DEL.png)
 ![Screenshot of empty igv window](/Images/SV_CTX_2.png)
 
-Note the seauence `GCCTGAAATGATCTTCCTCCGTCTTACCTATGAACTGGTCCTATCTTCCCTCTTCATTCACAAATATTCATTAGGTGC` that is present in both soft clips of the first screenshot. This is the inserted sequence. Looking at the reads and removing this sequence you will see it matches the reference seqeunce with a duplciatetion of the insert size (which is why we see the read depth increase) This is the classic signal for an insertion of a random sequence. It can be confermed the inserted sequence is random since trying to blat the soft clip will have no strong matches
+Note the sequence `GCCTGAAATGATCTTCCTCCGTCTTACCTATGAACTGGTCCTATCTTCCCTCTTCATTCACAAATATTCATTAGGTGC` that is present in both soft clips of the first screenshot. This is the inserted sequence. By examining the reads and removing this sequence, you will see that it matches the reference sequence with a duplication of the insert size (which is why we observe an increase in read depth). This is a classic signal for an insertion of a random sequence. It can be confirmed that the inserted sequence is random since attempting to BLAT the soft clip will yield no strong matches.
 
-the seciond screenshot is the same case as the first, however instead of a insert size tuplication a few bases have been deleted. This is likely due to non-homologous end joining but is another case of an insertions
+The second screenshot represents a similar case to the first; however, instead of an insert size duplication, a few bases have been deleted. This is likely due to non-homologous end joining but is another case of an insertion.
 
-The thrid screenshot is the classic example of a mobile element insertion. MEI alwasy have insert site duplications and tend to have reads whos mate maps to a different chromosome but not a consitent chromosome. This is becuase they are each mapping to a different instance of the same tranposible lement thought the genome
+The third screenshot is a classic example of a mobile element insertion (MEI). MEIs always have insert site duplications and tend to have reads whose mates map to different chromosomes, but not a consistent chromosome. This occurs because they are mapping to different instances of the same transposable element throughout the genome.
 
 ![Screenshot of empty igv window](/Images/SV_INS_1_12_image_1.png)
 ![Screenshot of empty igv window](/Images/SV_INS_1_12_image_2.png)
 
-These last two images show the same insertion. Note the conistent color of the reads showing their mate maps to a diffent chrmosome. In the first image these are maping to chr12. Going to this region in chr12 we see the second image, where they map to chr1. 
-In the second image however it does not look like an insertion at the breakpoints are far away from eachother. This is how we know it is an insertion and not a translocation. the region between the two break points in chr12 has been inserted in chr1
+These last two images show the same insertion. Note the consistent color of the reads indicating that their mates map to different chromosomes. In the first image, these reads map to chromosome 12. When you examine this region in chromosome 12, you see the second image, where the reads map to chromosome 1.
+
+In the second image, although it might not initially look like an insertion because the breakpoints are far apart, this is an insertion rather than a translocation. The region between the two breakpoints in chromosome 12 has been inserted into chromosome 1.
 
 ## False Positives
-Due to short read sequencings difficulty with SV detection it can have a high false positive rate. Thus it is important to know how false positives can occure. There are two main situations
+Due to short read sequencing's difficulty with SV detection, it can have a high false positive rate. Therefore, it is important to understand how false positives can occur. False positives are often caused by repetitive regions of the genome. A consistent way to identify false positives is by examining the soft clips. If it is a true positive, the soft clips should be consistent across all the reads. However, in these two images, there is no consistent sequence in the soft clips. This inconsistency means these are false positives and should be discarded.
 
-False psotive usally a cause by repedtive regions of the genome. The conistent way to know it is a false positive if by looking at the soft clips. If it is a true positive the soft clip should be consitent for all the reads. However in these two images we don't see a consitent sequence. This means these are false positives and should be distcarded
+![Screenshot of empty igv window](/Images/FP1.png)
+![Screenshot of empty igv window](/Images/FP1.png)
+
 
 # QUIZ TIME!
-It can be very difficult to understand how to visualzie variants without proacice, so go though the 20 cases in `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Mother_UDN613923.practice.vcf`. These all represent regions in `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Mother_UDN613923.bam`. Label them are true positives or false positves, and if they are true positives label what variant class they are (SNV, indel, or SV), how frequent they are in the genome (somatic, heteroygous, or homozygous) and for indels and SVs what kind they are (insertions, deletion, duplication, inversion, or translocation). 
+It can be very difficult to understand how to visualize variants without practice, so go through the 50 cases in `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Mother_UDN613923.practice.vcf`. These all represent regions in `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Mother_UDN613923.bam`. Label them as true positives or false positives, and if they are true positives, specify the variant class (SNV, indel, or SV), their frequency in the genome (somatic, heterozygous, or homozygous), and for indels and SVs, the type of variant (insertion, deletion, duplication, inversion, or translocation).
 
-Two  notes about labeling
--  a somatic variant will be one in less than 30% of reads
--  a indel will be 50 bases or less, with a sturcutal variant being 51 bases or more
-Keep in mind these defentions can change based on the project so don't use these thereshold exactly going forward. This is just to provide coinsitnct in how we label the variants
+Two notes about labeling:
 
-After analysing those 20 variants go to `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Mother_UDN613923.answerkey.vcf` to see the answer. feel free to check in with Andrew if you have any discrpecencies between your labeling and the answer key.
+- A somatic variant will be one in less than 30% of reads.
+- An indel will be 50 bases or less, with a structural variant being 51 bases or more.
+Keep in mind these definitions can change based on the project, so don't use these thresholds exactly going forward. This is just to provide consistency in how we label the variants.
 
+After analyzing those 20 variants, go to `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial/WGS_001_Mother_UDN613923.answerkey.vcf` to see the answer. Feel free to check in with Andrew if you have any discrepancies between your labeling and the answer key.
 
 
