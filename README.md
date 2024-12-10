@@ -29,7 +29,7 @@ IGV, also known as the Integrative Genomics Viewer, is a tool developed by the B
 # Setting up IGV
 After opening IGV, you should be greeted with a screen that looks similar to this.
 
-![Screenshot of empty igv window](/Images/Empty_IGV_Image.png)
+![Screenshot of empty igv window](/Images/Labed IGV empty window.pdf)
 
 There are a few key spots to point out:
 - Reference Contig: This is the reference contig that will be shown. It is important to make sure this matches the contig to which the BAM files you intend to visualize were aligned.
