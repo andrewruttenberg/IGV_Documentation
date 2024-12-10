@@ -15,9 +15,7 @@ Table of Content
 # Welcome to IGV
 This document is going to serve as an introduction to IGV, including how to set it up, the major features of the program, and how to identify different variants, including single nucleotide variants (SNVs), small variants from 2-50 bases (indels), and larger structural variants of at least 50 bases (SVs). There will also be examples and questions along the way to help this information sink in.
 
-For this tutorial, a few pieces of setup are required. First, the desktop applications for IGV can be downloaded [here](https://igv.org/doc/desktop/#DownloadPage/). You will have to select the right version of the application for your computer (Mac, PC, etc). Second, we will be using various files throughout this tutorial. These files can be found at `/storage1/fs1/jin810/Active/testing/Ruttenberg/IGV_Tutorial`.
-These files are
-(Fill in at end)
+For this tutorial, a few pieces of setup are required. First, the desktop applications for IGV can be downloaded [here](https://igv.org/doc/desktop/#DownloadPage/). You will have to select the right version of the application for your computer (Mac, PC, etc). Second, we will be using various files throughout this tutorial. These files can be found at `/storage1/fs1/jin810/Active/testing/Ruttenberg/SideProjects/IGV_Tutorial`.
   
 After confirming you have access to these files and have downloaded IGV, continue on to the rest of the tutorial.
 
